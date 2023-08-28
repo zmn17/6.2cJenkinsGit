@@ -1,5 +1,5 @@
 pipeline{
-    ageny any
+    agent any
     
     stages {
         stage("Build"){
@@ -55,12 +55,11 @@ pipeline{
             }
         }
 
-        post {
-            always {
-                // Archive generated artifacts and test reports
-                archiveArtifacts artifacts: '**/target/*.class', allowEmptyArchive: true
-                junit '**/target/test-reports/*.xml'
-		}
+       post {
+        always {
+            // Archive generated artifacts and test reports
+            archiveArtifacts artifacts: '**/target/*.class', allowEmptyArchive: true
+            junit '**/target/test-reports/*.xml'
         }
     }
 }
