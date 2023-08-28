@@ -1,0 +1,80 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('Build') {
+            steps {
+                script {
+                    sh 'mvn clean package'
+			  sh 'java -cp target/my-maven-app-1.0-SNAPSHOT.jar com.example.App'
+                }
+            }
+        }
+        
+        stage('Unit and Integration Tests') {
+            steps {
+                script {
+			  sh 'javac App.java'
+                    sh 'java -cp .:junit.jar.hamcrest.jar org.junit.runner.JUnitCore AppTest'
+                    sh 'mvn test'
+                    // Run integration tests using TestNG or other tools
+                }
+            }
+        }
+        
+        stage('Code Analysis') {
+            steps {
+                script {
+                    // Trigger SonarQube analysis using SonarScanner
+				withSonarQubeEnv('SonarQubeServer'){
+					sh 'sonar-scanner'
+				}
+                }
+            }
+        }
+        
+        stage('Security Scan') {
+            steps {
+                script {
+                    // Run OWASP Dependency-Check or other security scanning tools
+				sh 'dependency-check --project mavenProject --scan . --format HTML'
+                }
+            }
+        }
+        
+        stage('Deploy to Staging') {
+            steps {
+                script {
+                    // Use AWS CodeDeploy to deploy to staging
+				echo 'heelo'
+                }
+            }
+        }
+        
+        stage('Integration Tests on Staging') {
+            steps {
+                script {
+                    // Run Selenium or other tools to perform integration tests on staging	
+				echo 'heelo'
+                }
+            }
+        }
+        
+        stage('Deploy to Production') {
+            steps {
+                script {
+                    // Use AWS CodeDeploy to deploy to production
+				echo 'heelo'
+                }
+            }
+        }
+    }
+    
+    post {
+        always {
+            archiveArtifacts artifacts: '**/target/*.class', allowEmptyArchive: true
+            junit '**/target/test-reports/*.xml'
+            archiveArtifacts artifacts: '**/dependency-check-report.html', allowEmptyArchive: true
+        }
+    }
+}
