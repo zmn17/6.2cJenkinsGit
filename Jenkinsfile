@@ -39,19 +39,19 @@ pipeline{
         
         stage("Deploy to Staging"){
             steps {
-            
+            	echo "deploy to staging"
             }
         }
         
         stage("Integration Testing on Staging"){
             steps {
-            
+            	echo "testing"
             }
         }
         
         stage("Deploy to Production"){
             steps {
-            
+            	echo "production"
             }
         }
 
