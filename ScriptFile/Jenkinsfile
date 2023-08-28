@@ -51,12 +51,4 @@ pipeline {
             }
         }
     }
-    
-    post {
-        always {
-            archiveArtifacts artifacts: '**/target/*.class', allowEmptyArchive: true
-            junit '**/target/test-reports/*.xml'
-            archiveArtifacts artifacts: '**/dependency-check-report.html', allowEmptyArchive: true
-        }
-    }
 }
