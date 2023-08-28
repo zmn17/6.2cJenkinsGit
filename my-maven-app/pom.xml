@@ -19,5 +19,13 @@
     <!-- Use the compatible version of SonarQube Scanner plugin -->
     <sonar-maven-plugin.version>10.1.0.73491</sonar-maven-plugin.version>
   </properties>
-
+  <build>
+    <plugins>
+        <plugin>
+            <groupId>org.owasp</groupId>
+            <artifactId>dependency-check-maven</artifactId>
+            <version>6.3.2</version> <!-- Use the latest version -->
+        </plugin>
+    </plugins>
+</build>
 </project>
