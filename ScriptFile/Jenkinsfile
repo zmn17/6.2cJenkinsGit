@@ -8,18 +8,18 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                script {
-                    sh 'mvn clean package'
-			  sh 'java -cp target/my-maven-app-1.0-SNAPSHOT.jar com.example.App'
-                }
+              script {
+                  def mvnHome = tool(name: 'Maven3', type: 'Maven')
+                  def mvn = "${mvnHome}/bin/mvn"
+
+                  sh "${mvn} clean package"
+               }
             }
         }
         
         stage('Unit and Integration Tests') {
             steps {
                 script {
-			  sh 'javac App.java'
-                    sh 'java -cp .:junit.jar.hamcrest.jar org.junit.runner.JUnitCore AppTest'
                     sh 'mvn test'
                     // Run integration tests using TestNG or other tools
                 }
