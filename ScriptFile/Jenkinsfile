@@ -3,6 +3,7 @@ pipeline {
     
     tools{
         maven "Maven3"
+        SonarQube "SonarScanner"
     }
 
     stages {
@@ -24,9 +25,9 @@ pipeline {
         
         stage('Code Analysis') {
             steps {
-               withSonarQubeEnv('SonarQubeServer'){
-					sh "sonar-scanner"
-				    }
+                withSonarQubeEnv('SonarQubeScanner') {
+                    // Run SonarQube analysis
+                    sh 'mvn sonar:sonar'
             }
         }
         
