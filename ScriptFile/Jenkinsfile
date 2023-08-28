@@ -25,10 +25,7 @@ pipeline {
         stage('Code Analysis') {
             steps {
                 dir("my-maven-app"){
-                    withSonarQubeEnv('SonarQubeScanner') {
-                    // Run SonarQube analysis
-                    sh 'mvn sonar:sonar'
-                    }   
+                    sh 'checkmarx-cli analyze -project MyProject -source . -output results.xml'   
                 }
             }
         }
