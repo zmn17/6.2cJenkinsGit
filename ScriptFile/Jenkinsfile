@@ -1,75 +1,52 @@
 pipeline {
     agent any
     
-    environment {
-	PATH = "/opt/homebrew/opt/maven:$PATH"
-      }
+    tool {
+        Maven "Maven_Home"
+    }
     
     stages {
         stage('Build') {
             steps {
-              script {
-                  def mvnHome = tool(name: 'Maven3', type: 'Maven')
-                  def mvn = "${mvnHome}/bin/mvn"
-
-                  sh "${mvn} clean package"
-               }
+                sh "mvn clean package"
             }
         }
         
         stage('Unit and Integration Tests') {
             steps {
-                script {
-                    sh 'mvn test'
-                    // Run integration tests using TestNG or other tools
-                }
+                sh "mvn test"
             }
         }
         
         stage('Code Analysis') {
             steps {
-                script {
-                    // Trigger SonarQube analysis using SonarScanner
-				withSonarQubeEnv('SonarQubeServer'){
-					sh 'sonar-scanner'
-				}
-                }
+               withSonarQubeEnv('SonarQubeServer'){
+					sh "sonar-scanner"
+				    }
             }
         }
         
         stage('Security Scan') {
             steps {
-                script {
-                    // Run OWASP Dependency-Check or other security scanning tools
-				sh 'dependency-check --project mavenProject --scan . --format HTML'
-                }
+                sh "dependency-check --project mavenProject --scan . --format HTML"
             }
         }
         
         stage('Deploy to Staging') {
             steps {
-                script {
-                    // Use AWS CodeDeploy to deploy to staging
-				echo 'heelo'
-                }
+                echo 'heelo'
             }
         }
         
         stage('Integration Tests on Staging') {
             steps {
-                script {
-                    // Run Selenium or other tools to perform integration tests on staging	
-				echo 'heelo'
-                }
+                echo 'heelo'
             }
         }
         
         stage('Deploy to Production') {
             steps {
-                script {
-                    // Use AWS CodeDeploy to deploy to production
-				echo 'heelo'
-                }
+               echo 'heelo'
             }
         }
     }
