@@ -22,15 +22,15 @@ pipeline {
             }
         }
         
-        stage('Code Analysis') {
-            steps {
-                dir("my-maven-app"){
-                    withSonarQubeEnv('SonarQubeScanner') {
-                        sh 'mvn sonar:sonar'
-                    }  
-                }
-            }
-        }
+        // stage('Code Analysis') {
+        //     steps {
+        //         dir("my-maven-app"){
+        //             withSonarQubeEnv('SonarQubeScanner') {
+        //                 sh 'mvn sonar:sonar'
+        //             }  
+        //         }
+        //     }
+        // }
         
         stage('Security Scan') {
             steps {
