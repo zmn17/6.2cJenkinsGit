@@ -6,6 +6,7 @@ pipeline{
         stage("Build"){
             steps {
                 echo "Build maven project  "
+		tool name: 'Maven3', type: 'Maven'
                 sh 'mvn clean package'
                 sh 'java -cp target/my-maven-app-1.0-SNAPSHOT.jar com.example.App'
             }
