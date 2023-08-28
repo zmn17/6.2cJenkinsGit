@@ -1,4 +1,5 @@
 pipeline{
+    
     agent any
     
     stages {
@@ -60,6 +61,7 @@ pipeline{
             // Archive generated artifacts and test reports
             archiveArtifacts artifacts: '**/target/*.class', allowEmptyArchive: true
             junit '**/target/test-reports/*.xml'
-        }
-    }
+             }
+	}
+     }
 }
