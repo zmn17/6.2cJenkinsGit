@@ -16,7 +16,9 @@ pipeline {
         
         stage('Unit and Integration Tests') {
             steps {
-                sh "mvn test"
+                dir("my-maven-app"){
+                    sh "mvn test"
+                }
             }
         }
         
