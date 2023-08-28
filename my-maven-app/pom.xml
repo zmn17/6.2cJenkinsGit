@@ -15,4 +15,9 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  <properties>
+    <!-- Use the compatible version of SonarQube Scanner plugin -->
+    <sonar-maven-plugin.version>10.1.0.73491</sonar-maven-plugin.version>
+  </properties>
+
 </project>
