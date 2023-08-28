@@ -27,6 +27,7 @@ pipeline {
                 withSonarQubeEnv('SonarQubeScanner') {
                     // Run SonarQube analysis
                     sh 'mvn sonar:sonar'
+                }
             }
         }
         
