@@ -24,16 +24,20 @@ pipeline {
         
         stage('Code Analysis') {
             steps {
-                withSonarQubeEnv('SonarQubeScanner') {
+                dir("my-maven-app"){
+                    withSonarQubeEnv('SonarQubeScanner') {
                     // Run SonarQube analysis
                     sh 'mvn sonar:sonar'
+                    }   
                 }
             }
         }
         
         stage('Security Scan') {
             steps {
-                sh "dependency-check --project mavenProject --scan . --format HTML"
+                dir("my-maven-app"){
+                    sh "dependency-check --project mavenProject --scan . --format HTML"
+                }
             }
         }
         
