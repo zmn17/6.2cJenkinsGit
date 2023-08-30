@@ -15,7 +15,7 @@ pipeline {
             }
             post {
                 success {
-                    archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
+                    archiveArtifacts artifacts: '**/target/*.jar, **/*.log', allowEmptyArchive: true
 
                     script {
                         def emailSubject = "Pipeline Status: ${currentBuild.result}"
@@ -45,11 +45,11 @@ pipeline {
             }
             post {
                 success {
-                    archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
+                    archiveArtifacts artifacts: '**/target/*.jar, **/*.log', allowEmptyArchive: true
 
                     script {
                         def emailSubject = "Pipeline Status: ${currentBuild.result}"
-                        def emailBody = "The Scan's log is attached below!"
+                        def emailBody = "The Security Scan's log is attached below!"
                 
                         emailext (
                             to: 'aleesam913@gmail.com',
