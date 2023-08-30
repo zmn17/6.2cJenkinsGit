@@ -15,9 +15,11 @@ pipeline {
             }
             post {
                 success {
-                    mail to: "s222283975@deakin.edu.au"
-                    subject: "Status: ${currentBuild.result}"
-                    body: currentBuild.rawBuild.getLog(1000)
+                    script {
+                        mail to: "s222283975@deakin.edu.au"
+                        subject: "Status: ${currentBuild.result}"
+                        body: currentBuild.rawBuild.getLog(1000)
+                    }
                 }
             }
         }
@@ -34,9 +36,11 @@ pipeline {
             }
             post {
                 success {
-                    mail to: "s222283975@deakin.edu.au"
-                    subject: "Status: ${currentBuild.result}"
-                    body: currentBuild.rawBuild.getLog(1000)
+                    script {
+                        mail to: "s222283975@deakin.edu.au"
+                        subject: "Status: ${currentBuild.result}"
+                        body: currentBuild.rawBuild.getLog(1000)
+                    }
                 }
             }
         }
