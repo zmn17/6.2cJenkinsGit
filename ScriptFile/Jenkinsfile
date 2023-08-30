@@ -13,13 +13,15 @@ pipeline {
             steps {
                 echo "Testing using JUnit"
             }
-        }
-
-        post {
-            success {
-                mail to: "s222283975@deakin.edu.au",
-                subject: "Status: ${currentBuild.result}",
-                body: currentBuild.rawBuild.getLog(1000)
+            post {
+                success {
+                    script {
+                        def logContent = currentBuild.rawBuild.getLog(1000)
+                        emailext body: logContent,
+                            subject: "Status: ${currentBuild.result}",
+                            to: "s222283975@deakin.edu.au"
+                    }
+                }
             }
         }
         
@@ -33,15 +35,19 @@ pipeline {
             steps {
                 echo "OWASP Dependency-Check Plugin"
             }
-        }
 
-        post {
-            success {
-                mail to: "s222283975@deakin.edu.au",
-                subject: "Status: ${currentBuild.result}",
-                body: currentBuild.rawBuild.getLog(1000)
+            post {
+                success {
+                    script {
+                        def logContent = currentBuild.rawBuild.getLog(1000)
+                        emailext body: logContent,
+                            subject: "Status: ${currentBuild.result}",
+                            to: "s222283975@deakin.edu.au"
+                    }
+                }
             }
         }
+
         
         stage('Deploy to Staging') {
             steps {
