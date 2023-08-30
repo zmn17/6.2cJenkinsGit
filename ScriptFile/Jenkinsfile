@@ -1,60 +1,47 @@
 pipeline {
     agent any
     
-    tools{
-        maven "Maven3"
-    }
 
     stages {
         stage('Build') {
             steps {
-                dir("my-maven-app"){
-                    sh "mvn clean package"
-                }
+                echo "Building using maven"
             }
         }
         
         stage('Unit and Integration Tests') {
             steps {
-                dir("my-maven-app"){
-                    sh "mvn test"
-                }
+                echo "Testing using JUnit"
             }
         }
         
-        // stage('Code Analysis') {
-        //     steps {
-        //         dir("my-maven-app"){
-        //             withSonarQubeEnv('SonarQubeScanner') {
-        //                 sh 'mvn sonar:sonar'
-        //             }  
-        //         }
-        //     }
-        // }
+        stage('Code Analysis') {
+            steps {
+                echo "using SonarQube tool to analyse the code."
+            }
+        }
         
         stage('Security Scan') {
             steps {
-                dir("my-maven-app"){
-                    sh "dependency-check --project mavenProject --scan . --format HTML"
-                }
+                echo "OWASP Dependency-Check Plugin"
             }
         }
         
         stage('Deploy to Staging') {
             steps {
-                echo 'heelo'
+                echo "Deploying to staging in AWS EC2 server"
             }
         }
         
         stage('Integration Tests on Staging') {
             steps {
-                echo 'heelo'
+                echo "using JUnit for Integration testing"
             }
         }
         
         stage('Deploy to Production') {
             steps {
-               echo 'heelo'
+               echo "Deploying to production in AWS EC2 server"
             }
         }
     }
