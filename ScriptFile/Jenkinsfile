@@ -12,13 +12,14 @@ pipeline {
         stage('Unit and Integration Tests') {
             steps {
                 echo "Testing using JUnit"
+            }
+            post {
+                success {
+                    archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
 
-                archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
-
-                script {
                     def emailSubject = "Pipeline Status: ${currentBuild.result}"
                     def emailBody = "The Testing log is attached below!"
-
+                
                     emailext (
                         to: 'aleesam913@gmail.com',
                         subject: emailSubject,
@@ -39,13 +40,14 @@ pipeline {
         stage('Security Scan') {
             steps {
                 echo "OWASP Dependency-Check Plugin"
+            }
+            post {
+                success {
+                    archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
 
-                archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
-
-                script {
                     def emailSubject = "Pipeline Status: ${currentBuild.result}"
-                    def emailBody = "The Scan's log is attached below!"
-
+                    def emailBody = "The Testing log is attached below!"
+                
                     emailext (
                         to: 'aleesam913@gmail.com',
                         subject: emailSubject,
