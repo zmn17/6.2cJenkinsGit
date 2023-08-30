@@ -15,20 +15,9 @@ pipeline {
             }
             post {
                 success {
-                    archiveArtifacts artifacts: '**/target/*.jar, **/*.log', allowEmptyArchive: true
-
-                    script {
-                        def emailSubject = "Pipeline Status: ${currentBuild.result}"
-                        def emailBody = "The Testing's log is attached below!"
-                
-                        emailext (
-                            to: 'aleesam913@gmail.com',
-                            subject: emailSubject,
-                            body: emailBody,
-                            mimeType: 'text/html',
-                            attachmentsPattern: '**/*.log, **/target/*.jar'
-                        )
-                    }
+                    mail to: "s222283975@deakin.edu.au"
+                    subject: "Status: ${currentBuild.result}"
+                    body: currentBuild.rawBuild.getLog(1000)
                 }
             }
         }
@@ -45,20 +34,9 @@ pipeline {
             }
             post {
                 success {
-                    archiveArtifacts artifacts: '**/target/*.jar, **/*.log', allowEmptyArchive: true
-
-                    script {
-                        def emailSubject = "Pipeline Status: ${currentBuild.result}"
-                        def emailBody = "The Security Scan's log is attached below!"
-                
-                        emailext (
-                            to: 'aleesam913@gmail.com',
-                            subject: emailSubject,
-                            body: emailBody,
-                            mimeType: 'text/html',
-                            attachmentsPattern: '**/*.log, **/target/*.jar'
-                        )
-                    }
+                    mail to: "s222283975@deakin.edu.au"
+                    subject: "Status: ${currentBuild.result}"
+                    body: currentBuild.rawBuild.getLog(1000)
                 }
             }
         }
