@@ -20,7 +20,7 @@ pipeline {
                     def emailBody = "The Testing log is attached below!"
 
                     emailext (
-                        to: 's222283975@deakin.edu.au',
+                        to: 'aleesam913@gmail.com',
                         subject: emailSubject,
                         body: emailBody,
                         mimeType: 'text/html',
@@ -47,7 +47,7 @@ pipeline {
                     def emailBody = "The Scan's log is attached below!"
 
                     emailext (
-                        to: 's222283975@deakin.edu.au',
+                        to: 'aleesam913@gmail.com',
                         subject: emailSubject,
                         body: emailBody,
                         mimeType: 'text/html',
