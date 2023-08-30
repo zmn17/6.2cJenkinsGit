@@ -15,18 +15,11 @@ pipeline {
             }
             post {
                 success {
-                    script {
-                        def logContent = ""
-                        try {
-                            logContent = currentBuild.rawBuild.getLog(1000) // Adjust the number to capture more or fewer lines of the log
-                        } catch (Exception e) {
-                            logContent = "Error occurred while capturing build log: ${e.message}\n${e.getStackTrace().join('\n')}"
-                        }
-                        
-                        emailext body: logContent,
-                            subject: "Status: ${currentBuild.result}",
-                            to: "s222283975@deakin.edu.au"
-                    }
+                    emailext (
+                        subject: "Build Successful - ${currentBuild.fullDisplayName}",
+                        to: "s222283975@deakin.edu.au",
+                        body: '''${SCRIPT, template="groovy-html.template"}'''
+                    )
                 }
             }
         }
@@ -44,18 +37,11 @@ pipeline {
 
             post {
                 success {
-                    script {
-                        def logContent = ""
-                        try {
-                            logContent = currentBuild.rawBuild.getLog(1000) // Adjust the number to capture more or fewer lines of the log
-                        } catch (Exception e) {
-                            logContent = "Error occurred while capturing build log: ${e.message}\n${e.getStackTrace().join('\n')}"
-                        }
-                        
-                        emailext body: logContent,
-                            subject: "Status: ${currentBuild.result}",
-                            to: "s222283975@deakin.edu.au"
-                    }
+                    emailext (
+                        subject: "Build Successful - ${currentBuild.fullDisplayName}",
+                        to: "s222283975@deakin.edu.au",
+                        body: '''${SCRIPT, template="groovy-html.template"}'''
+                    )
                 }
             }
         }
