@@ -13,6 +13,21 @@ pipeline {
             steps {
                 echo "Testing using JUnit"
             }
+            steps {
+                archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
+
+                script {
+                    def emailSubject = "Pipeline Status: ${currentBuild.result}"
+                    def emailBody = "The Testing log is attached below!"
+
+                    emailext (
+                        to: 's222283975@deakin.edu.au',
+                        subject: emailSubject,
+                        body: emailBody,
+                        mimeType: 'text/html',
+                        attachmentsPattern: '**/*.log, **/target/*.jar'
+                }
+            }
         }
         
         stage('Code Analysis') {
@@ -24,6 +39,21 @@ pipeline {
         stage('Security Scan') {
             steps {
                 echo "OWASP Dependency-Check Plugin"
+            }
+            steps {
+                archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
+
+                script {
+                    def emailSubject = "Pipeline Status: ${currentBuild.result}"
+                    def emailBody = "The Scan's log is attached below!"
+
+                    emailext (
+                        to: 's222283975@deakin.edu.au',
+                        subject: emailSubject,
+                        body: emailBody,
+                        mimeType: 'text/html',
+                        attachmentsPattern: '**/*.log, **/target/*.jar'
+                }
             }
         }
         
