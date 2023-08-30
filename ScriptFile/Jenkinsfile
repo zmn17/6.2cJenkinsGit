@@ -17,16 +17,18 @@ pipeline {
                 success {
                     archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
 
-                    def emailSubject = "Pipeline Status: ${currentBuild.result}"
-                    def emailBody = "The Testing log is attached below!"
+                    script {
+                        def emailSubject = "Pipeline Status: ${currentBuild.result}"
+                        def emailBody = "The Testing's log is attached below!"
                 
-                    emailext (
-                        to: 'aleesam913@gmail.com',
-                        subject: emailSubject,
-                        body: emailBody,
-                        mimeType: 'text/html',
-                        attachmentsPattern: '**/*.log, **/target/*.jar'
-                    )
+                        emailext (
+                            to: 'aleesam913@gmail.com',
+                            subject: emailSubject,
+                            body: emailBody,
+                            mimeType: 'text/html',
+                            attachmentsPattern: '**/*.log, **/target/*.jar'
+                        )
+                    }
                 }
             }
         }
@@ -45,16 +47,18 @@ pipeline {
                 success {
                     archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
 
-                    def emailSubject = "Pipeline Status: ${currentBuild.result}"
-                    def emailBody = "The Testing log is attached below!"
+                    script {
+                        def emailSubject = "Pipeline Status: ${currentBuild.result}"
+                        def emailBody = "The Scan's log is attached below!"
                 
-                    emailext (
-                        to: 'aleesam913@gmail.com',
-                        subject: emailSubject,
-                        body: emailBody,
-                        mimeType: 'text/html',
-                        attachmentsPattern: '**/*.log, **/target/*.jar'
-                    )
+                        emailext (
+                            to: 'aleesam913@gmail.com',
+                            subject: emailSubject,
+                            body: emailBody,
+                            mimeType: 'text/html',
+                            attachmentsPattern: '**/*.log, **/target/*.jar'
+                        )
+                    }
                 }
             }
         }
