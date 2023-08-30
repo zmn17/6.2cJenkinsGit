@@ -26,6 +26,7 @@ pipeline {
                         body: emailBody,
                         mimeType: 'text/html',
                         attachmentsPattern: '**/*.log, **/target/*.jar'
+                    )
                 }
             }
         }
@@ -53,6 +54,7 @@ pipeline {
                         body: emailBody,
                         mimeType: 'text/html',
                         attachmentsPattern: '**/*.log, **/target/*.jar'
+                    )
                 }
             }
         }
