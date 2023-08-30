@@ -12,8 +12,7 @@ pipeline {
         stage('Unit and Integration Tests') {
             steps {
                 echo "Testing using JUnit"
-            }
-            steps {
+
                 archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
 
                 script {
@@ -40,8 +39,7 @@ pipeline {
         stage('Security Scan') {
             steps {
                 echo "OWASP Dependency-Check Plugin"
-            }
-            steps {
+
                 archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
 
                 script {
