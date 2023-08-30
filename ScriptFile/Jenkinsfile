@@ -14,11 +14,19 @@ pipeline {
                 echo "Testing using JUnit"
             }
             post {
-                success {
+                always {
+                    // Email notification configuration
                     emailext (
-                        subject: "Build Successful - ${currentBuild.fullDisplayName}",
-                        to: "s222283975@deakin.edu.au",
-                        body: '''${SCRIPT, template="groovy-html.template"}'''
+                        to: 's222283975@deakin.edu.au',
+                        subject: "Build Notification - ${currentBuild.result}",
+                        body: """
+                        Build ${currentBuild.fullDisplayName} has finished.\n
+                        Result: ${currentBuild.result}\n
+                        Build URL: ${env.BUILD_URL}
+                        """,
+                        mimeType: 'text/plain',
+                        attachLog: true,
+                        attachmentsPattern: '**/*.log'
                     )
                 }
             }
@@ -36,11 +44,19 @@ pipeline {
             }
 
             post {
-                success {
+                always {
+                    // Email notification configuration
                     emailext (
-                        subject: "Build Successful - ${currentBuild.fullDisplayName}",
-                        to: "s222283975@deakin.edu.au",
-                        body: '''${SCRIPT, template="groovy-html.template"}'''
+                        to: 's222283975@deakin.edu.au',
+                        subject: "Build Notification - ${currentBuild.result}",
+                        body: """
+                        Build ${currentBuild.fullDisplayName} has finished.\n
+                        Result: ${currentBuild.result}\n
+                        Build URL: ${env.BUILD_URL}
+                        """,
+                        mimeType: 'text/plain',
+                        attachLog: true,
+                        attachmentsPattern: '**/*.log'
                     )
                 }
             }
