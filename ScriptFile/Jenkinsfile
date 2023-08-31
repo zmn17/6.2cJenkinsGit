@@ -17,12 +17,12 @@ pipeline {
                 failure {
                     mail to: "s222283975@deakin.edu.au",
                     subject: currentBuild.result,
-                    body: "Build failed" 
+                    body: "Test failed" 
                 }
                 success {
                     mail to: "s222283975@deakin.edu.au",
                     subject: currentBuild.result,
-                    body: "Build was successfull"
+                    body: "Test was successfull"
                         
                 }
             }
@@ -43,13 +43,13 @@ pipeline {
                 failure {
                         mail to: "s222283975@deakin.edu.au",
                         subject: currentBuild.result,
-                        body: "Build failed"
+                        body: "Scan failed"
                 }
 
                 success {
                      mail to: "s222283975@deakin.edu.au",
                         subject: currentBuild.result,
-                        body: "Build was successful"
+                        body: "Scan was successful"
                 }
             }
         }
