@@ -15,18 +15,15 @@ pipeline {
             }
             post {
                 failure {
-                    emailext attachLog: true,
-                        to: "s222283975@deakin.edu.au",
-                        subject: currentBuild.result,
-                        body: "Build failed. Check the attached log for details.",
-                        attachmentsPattern: "**/*.log"
+                    mail to: "s222283975@deakin.edu.au",
+                    subject: currentBuild.result,
+                    body: "Build failed" 
                 }
                 success {
-                    emailext attachLog: true,
-                        to: "s222283975@deakin.edu.au",
-                        subject: currentBuild.result,
-                        body: "Build failed. Check the attached log for details.",
-                        attachmentsPattern: "**/*.log"
+                    mail to: "s222283975@deakin.edu.au",
+                    subject: currentBuild.result,
+                    body: "Build was successfull"
+                        
                 }
             }
         }
@@ -44,24 +41,19 @@ pipeline {
 
             post {
                 failure {
-                        emailext attachLog: true,
-                        to: "s222283975@deakin.edu.au",
+                        mail to: "s222283975@deakin.edu.au",
                         subject: currentBuild.result,
-                        body: "Build failed. Check the attached log for details.",
-                        attachmentsPattern: "**/*.log"
+                        body: "Build failed"
                 }
 
                 success {
-                    emailext attachLog: true,
-                        to: "s222283975@deakin.edu.au",
+                     mail to: "s222283975@deakin.edu.au",
                         subject: currentBuild.result,
-                        body: "Build failed. Check the attached log for details.",
-                        attachmentsPattern: "**/*.log"
+                        body: "Build was successful"
                 }
             }
         }
 
-        
         stage('Deploy to Staging') {
             steps {
                 echo "Deploying to staging in AWS EC2 server"
