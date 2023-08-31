@@ -15,22 +15,18 @@ pipeline {
             }
             post {
                 failure {
-                    script {
-                        currentBuild.result = 'FAILURE'
-                        emailext body: "Build failed. Check the attached log for details.",
-                                 subject: "Build Status: FAILURE",
-                                 
-                                 to: "s222283975@deakin.edu.au"
-                    }
+                    emailex attachLog: true,
+                        to: "s222283975@deakin.edu.au",
+                        subject: "Build Status: " currentBuild.result,
+                        body: "Build failed. Check the attached log for details.",
+                        attachmentsPattern: "**/*.log"
                 }
                 success {
-                    script {
-                        currentBuild.result = 'SUCCESS'
-                        emailext body: "Build succeeded. Check the attached log for details.",
-                                 subject: "Build Status: SUCCESS",
-                                 
-                                 to: "s222283975@deakin.edu.au"
-                    }
+                    emailex attachLog: true,
+                        to: "s222283975@deakin.edu.au",
+                        subject: "Build Status: " currentBuild.result,
+                        body: "Build failed. Check the attached log for details.",
+                        attachmentsPattern: "**/*.log"
                 }
             }
         }
@@ -48,22 +44,19 @@ pipeline {
 
             post {
                 failure {
-                    script {
-                        currentBuild.result = 'FAILURE'
-                        emailext body: "Build failed. Check the attached log for details.",
-                                 subject: "Build Status: FAILURE",
-                                 
-                                 to: "s222283975@deakin.edu.au"
-                    }
+                        emailex attachLog: true,
+                        to: "s222283975@deakin.edu.au",
+                        subject: "Build Status: " currentBuild.result,
+                        body: "Build failed. Check the attached log for details.",
+                        attachmentsPattern: "**/*.log"
                 }
+
                 success {
-                    script {
-                        currentBuild.result = 'SUCCESS'
-                        emailext body: "Build succeeded. Check the attached log for details.",
-                                 subject: "Build Status: SUCCESS",
-                                 
-                                 to: "s222283975@deakin.edu.au"
-                    }
+                    emailex attachLog: true,
+                        to: "s222283975@deakin.edu.au",
+                        subject: "Build Status: " currentBuild.result,
+                        body: "Build failed. Check the attached log for details.",
+                        attachmentsPattern: "**/*.log"
                 }
             }
         }
